@@ -1,20 +1,20 @@
 {
   "files": {
     "main.css": "/clone-25sprout/static/css/main.152774a8.chunk.css",
-    "main.js": "/clone-25sprout/static/js/main.94492ec2.chunk.js",
-    "main.js.map": "/clone-25sprout/static/js/main.94492ec2.chunk.js.map",
+    "main.js": "/clone-25sprout/static/js/main.b80ddb3d.chunk.js",
+    "main.js.map": "/clone-25sprout/static/js/main.b80ddb3d.chunk.js.map",
     "runtime-main.js": "/clone-25sprout/static/js/runtime-main.78a62e4f.js",
     "runtime-main.js.map": "/clone-25sprout/static/js/runtime-main.78a62e4f.js.map",
-    "static/js/2.0ffa881d.chunk.js": "/clone-25sprout/static/js/2.0ffa881d.chunk.js",
-    "static/js/2.0ffa881d.chunk.js.map": "/clone-25sprout/static/js/2.0ffa881d.chunk.js.map",
+    "static/js/2.f56a617d.chunk.js": "/clone-25sprout/static/js/2.f56a617d.chunk.js",
+    "static/js/2.f56a617d.chunk.js.map": "/clone-25sprout/static/js/2.f56a617d.chunk.js.map",
     "index.html": "/clone-25sprout/index.html",
     "static/css/main.152774a8.chunk.css.map": "/clone-25sprout/static/css/main.152774a8.chunk.css.map",
-    "static/js/2.0ffa881d.chunk.js.LICENSE.txt": "/clone-25sprout/static/js/2.0ffa881d.chunk.js.LICENSE.txt"
+    "static/js/2.f56a617d.chunk.js.LICENSE.txt": "/clone-25sprout/static/js/2.f56a617d.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.78a62e4f.js",
-    "static/js/2.0ffa881d.chunk.js",
+    "static/js/2.f56a617d.chunk.js",
     "static/css/main.152774a8.chunk.css",
-    "static/js/main.94492ec2.chunk.js"
+    "static/js/main.b80ddb3d.chunk.js"
   ]
 }
