@@ -40,14 +40,14 @@ const Select = styled.div`
     width: 1px;
     height: 70px;
   }
-  & > div{
+  & > div {
     display:inline-block;
     cursor:pointer;
     transition:opacity 0.3s;
-    &:nth-child(1){
+    &:nth-of-type(1){
       opacity:${props=>props.content==='cake'?1:0.3};
     };
-    &:nth-child(3){
+    &:nth-of-type(2){
       opacity:${props=>props.content===''?1:0.3};
     };
   };

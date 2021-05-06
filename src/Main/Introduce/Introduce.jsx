@@ -15,7 +15,7 @@ const Div = styled.div`
   position: relative;
   & > div {
     position:absolute;
-    z-index:200;
+    z-index:190;
     top:160px;
     left:100px;
     & > p {
@@ -23,15 +23,15 @@ const Div = styled.div`
       margin:0px;
       font-weight: bold;
     };
-    & > p:nth-child(1){
+    & > p:nth-of-type(1){
       padding-left:5px;
       font-size:18px;
       line-height:24px;
     };
-    & > p:nth-child(2),p:nth-child(3){
+    & > p:nth-of-type(2),p:nth-of-type(3){
       font-size:64px;
     };
-    & > p:nth-child(4),p:nth-child(5){
+    & > p:nth-of-type(4),p:nth-of-type(5){
       font-size:18px;
     }
   }

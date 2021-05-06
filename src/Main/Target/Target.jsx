@@ -8,6 +8,7 @@ const Image = styled.div`
   width:100%;
   height:100vh;
   background-repeat:no-repeat;
+  overflow-x:hidden;
   & > div {
     position:absolute;
     top:130px;
@@ -19,7 +20,7 @@ const Image = styled.div`
     & h1 {
       font-size:48px;
     }
-    & > p {
+    & > div {
       font-size: 16px;
       line-height: 29px;
       margin-top: 20px;
@@ -48,10 +49,10 @@ const Target = () => {
       <div>
         <h5>We provide innovative</h5>
         <h1>Digital Solutions</h1>
-        <p>
+        <div>
           <div>在</div>
           數位的領域裡，我們專注於提供給客戶最有效的解決方案，透過友善的介面設計，以及出色的程式技術團隊，共同打造出優異的專案和數位產品，幫助客戶在網路世界裡，奠定最穩固的基礎。
-        </p>
+        </div>
       </div>
     </Image>
   )

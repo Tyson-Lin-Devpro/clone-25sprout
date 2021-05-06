@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 const Content = styled.div`
   & > p{
     line-height:30px;
-  }  
+  };  
   & > a {
       text-align:center;
       cursor:pointer;
@@ -15,11 +15,11 @@ const Content = styled.div`
       height:50px;
       & :hover{
         background-color: hsla(0,0%,100%,.2);
-      }
+      };
       & > div {
         width:100%;
         height:100%;
-        background-color: hsla(0,0%,100%,.2);
+        background-color: hsla(0,0%,100%,0);
         border: 1px solid #fff;
         color:white;
         font-size:20px;
@@ -28,6 +28,7 @@ const Content = styled.div`
         transition:all 0.3s;
         &:hover{
           padding-right:15px;
+          background-color: hsla(0,0%,100%,0.2);
         };
         &:after{
           content:'»';
