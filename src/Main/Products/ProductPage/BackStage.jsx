@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 const Content = styled.div`
+  height:160px;
   & > p{
     line-height:30px;
   };

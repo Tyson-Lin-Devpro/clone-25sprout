@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 const Image = styled.div`
   background-image: url(https://www.25sprout.com/assets/intro-bg__b4af211e93ca6c5b935d299bc5198dc1.jpg);
-  background-size:cover  ;
+  background-size:110%  ;
   background-position: 50% 50%;
   position: relative;
   width:100%;

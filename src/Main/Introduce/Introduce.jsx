@@ -1,4 +1,3 @@
-// import { keyframes } from '@emotion/css';
 import styled from '@emotion/styled';
 
 const FirstPart = styled.div`
@@ -36,14 +35,7 @@ const Div = styled.div`
     }
   }
 `;
-// const a = keyframes`
-//   from{
-//     transform: scale(1.3)
-//   },
-//   to{
-//     transform: scale(1)
-//   }
-// `
+
 const Image = styled.img`
   height:100vh;
   min-height:585px;
@@ -51,10 +43,8 @@ const Image = styled.img`
   min-width:1040px;
   transform: scale(1.3);
   filter:brightness(70%);
+  
 `;
-// animation-duration: 25s;
-// animation-delay: 3s;
-// animation-name: ${a};
 
 
 

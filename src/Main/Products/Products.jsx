@@ -1,8 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import SurveyCake from './ProductPage/SurveyCake'
 import BackStage from './ProductPage/BackStage'
-
 
 const ProductContent = styled.div`
   width:100%;
@@ -45,10 +44,10 @@ const Select = styled.div`
     cursor:pointer;
     transition:opacity 0.3s;
     &:nth-of-type(1){
-      opacity:${props=>props.content==='cake'?1:0.3};
+      opacity:${props => props.content === 'cake' ? 1 : 0.3};
     };
     &:nth-of-type(2){
-      opacity:${props=>props.content===''?1:0.3};
+      opacity:${props => props.content === '' ? 1 : 0.3};
     };
   };
 `
@@ -71,35 +70,82 @@ const RightImage = styled.div`
 const Logo = styled.div`
   position:absolute;
   top:0px;
-  left:-500px;
   color:rgba(247,255,2,0.2);
   font-size: 880px;
   user-select:none;
+  transition:all 0.2s;
+`
+const ImageDisplay = styled.div`
+  border: 35px solid transparent;
+  border-bottom: none;
+  max-width: 972px;
+  font-size: 0;
+  margin: 0 auto;
+  position: relative;
+  & > img {
+    width: 100%;
+    opacity: 0;
+  }
+`
+const OpacityImage = styled.img`
+  opacity: 0;
+`
+const ChangeImage = styled.img`
+  border: 35px solid #000;
+  border-bottom: none;
+  position: absolute;
+  left: 0;
+  transition: all 0.7s ease-in-out;
 `
 
 const Products = () => {
-  const [content,setContent] = useState('cake')
+  const [content, setContent] = useState('cake')
+  const [offsetY, setOffsetY] = useState(0);
+  const [productHeight, setProductHeight] = useState([]);
+  const handleScroll = () => setOffsetY(window.pageYOffset);
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+    setProductHeight([document.getElementById('product').offsetTop, document.getElementById('product').offsetHeight])
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+  const rollingText = () => {
+    if (
+      window.innerHeight + window.pageYOffset > productHeight[0] &&
+      window.pageYOffset < productHeight[0] + productHeight[1]
+    ) {
+      return Math.round(offsetY / 100) * 20
+    } else {
+      return
+    }
+  }
 
   return (
-    <ProductContent>
+    <ProductContent id='product'>
       <Image />
-      <Logo>25sprout</Logo>
+      <Logo style={{ left: `-${rollingText()}px` }}>25sprout</Logo>
       <Title>
         <h5>Our</h5>
         <h1>Products</h1>
         <span>[ 新芽產品 ]</span>
         <Select content={content}>
-          <div onClick={()=>{setContent('cake')}} >
+          <div onClick={() => { setContent('cake') }} >
             <LeftImage />
             企業級的雲端問卷服務
           </div>
           <span />
-          <div onClick={()=>{setContent('')}}>
+          <div onClick={() => { setContent('') }}>
             <RightImage />
             網路創新產品的最佳基石
           </div>
         </Select>
-        {content==='cake'?<SurveyCake/>:<BackStage/>}
+        {content === 'cake' ? <SurveyCake /> : <BackStage />}
+        <ImageDisplay>
+          <OpacityImage src='https://www.25sprout.com/static/img/index/demo-surveycake.png' />
+          <ChangeImage src='https://www.25sprout.com/static/img/index/demo-surveycake.png' style={{opacity:`${content === 'cake' ?1:0}`}} />
+          <ChangeImage src='https://www.25sprout.com/static/img/index/demo-backstage.jpg' style={{opacity:`${content === '' ?1:0}`}}/>
+        </ImageDisplay>
       </Title>
     </ProductContent>
   )
