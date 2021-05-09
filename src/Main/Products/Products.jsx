@@ -5,7 +5,6 @@ import BackStage from './ProductPage/BackStage'
 
 const ProductContent = styled.div`
   width:100%;
-  height:100vh;
   position:relative;
   overflow: hidden;
 `
@@ -13,18 +12,24 @@ const ProductContent = styled.div`
 const Image = styled.div`
   background-image: url(https://www.25sprout.com/assets/project-bg__5384ec67396b09dd7c69f956c1811698.jpg);
   width: 100%;  
-  height:100vh;
+  height:100%;
+  min-height:auto;
   background-position: 50% 50%;
   overflow-x: hidden;
   filter:brightness(30%);
+  position:absolute;
+  top:-100px:
+  left:0px;
 `
 
 const Title = styled.div`
-  position:absolute;
   text-align:center;
   top:10%;
   width:100%;
   color:white;
+  position:relative;
+  z-index:200;
+  padding-top: 100px;
 `
 
 const Select = styled.div`
@@ -79,9 +84,10 @@ const ImageDisplay = styled.div`
   border: 35px solid transparent;
   border-bottom: none;
   max-width: 972px;
+  width:80%;
   font-size: 0;
+  position:relative;
   margin: 0 auto;
-  position: relative;
   & > img {
     width: 100%;
     opacity: 0;
@@ -97,7 +103,12 @@ const ChangeImage = styled.img`
   left: 0;
   transition: all 0.7s ease-in-out;
 `
-
+const ImageCotainer = styled.div`
+  width: 70%;
+  margin-left: 15%;
+  position: relative;
+  overflow: hidden;
+`
 const Products = () => {
   const [content, setContent] = useState('cake')
   const [offsetY, setOffsetY] = useState(0);
@@ -105,6 +116,7 @@ const Products = () => {
   const handleScroll = () => setOffsetY(window.pageYOffset);
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)
+    setOffsetY(window.pageYOffset)
     setProductHeight([document.getElementById('product').offsetTop, document.getElementById('product').offsetHeight])
     return () => {
       window.removeEventListener('scroll', handleScroll)
@@ -116,8 +128,11 @@ const Products = () => {
       window.pageYOffset < productHeight[0] + productHeight[1]
     ) {
       return Math.round(offsetY / 100) * 20
-    } else {
-      return
+    }
+  }
+  const rollingImage = () => {
+    if (window.innerHeight + window.pageYOffset > productHeight[0]) {
+      return Math.round(offsetY / 100) * 10
     }
   }
 
@@ -141,11 +156,13 @@ const Products = () => {
           </div>
         </Select>
         {content === 'cake' ? <SurveyCake /> : <BackStage />}
-        <ImageDisplay>
-          <OpacityImage src='https://www.25sprout.com/static/img/index/demo-surveycake.png' />
-          <ChangeImage src='https://www.25sprout.com/static/img/index/demo-surveycake.png' style={{opacity:`${content === 'cake' ?1:0}`}} />
-          <ChangeImage src='https://www.25sprout.com/static/img/index/demo-backstage.jpg' style={{opacity:`${content === '' ?1:0}`}}/>
-        </ImageDisplay>
+        <ImageCotainer>
+          <ImageDisplay style={{transform:`translateY(350px)`}}>
+            <OpacityImage src='https://www.25sprout.com/static/img/index/demo-surveycake.png' />
+            <ChangeImage src='https://www.25sprout.com/static/img/index/demo-surveycake.png' style={{opacity:`${content === 'cake' ?1:0}`}} />
+            <ChangeImage src='https://www.25sprout.com/static/img/index/demo-backstage.jpg' style={{opacity:`${content === '' ?1:0}`}}/>
+          </ImageDisplay>
+        </ImageCotainer>
       </Title>
     </ProductContent>
   )

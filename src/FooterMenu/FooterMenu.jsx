@@ -1,16 +1,22 @@
 import styled from '@emotion/styled'
 import { RiPhoneFill } from 'react-icons/ri'
 import { FaPaperPlane, FaMapMarkerAlt, FaArrowRight } from 'react-icons/fa'
+import { useState, useEffect } from 'react';
 
+const EmptyFooter = styled.div`
+  width:100vw;
+  height:100vh;
+  position:relative;
+`
 const WholeFooter = styled.div`
   margin:0;
   padding:0;
-  position:fixed;
-  bottom:-100vh;
-  z-index:500;
-  transition:margin-bottom 0.6s;
   background-color:white;
-  margin-bottom:${(props) => props.toggle?'100vh':''}
+  transition-property:margin-bottom,top;
+  transition-duration:0.6s,0.6s;
+  transition-timing-function:ease-in-out;
+  z-index:500;
+  ${props=>props.magicPower()}
 `
 const Footer = styled.div`
   width:100vw;
@@ -145,75 +151,127 @@ const ViewButton = styled.div`
     width:100%;
   }
 `
-const FooterMenu = ({toggle}) => {
-
+const FooterMenu = ({ toggle }) => {
+  const [offsetY, setOffsetY] = useState(0);
+  const [footerOffTop, setFooterOffTop] = useState(0);
+  const [footerMove, setFooterMove] = useState(0);
+  const scrolling = () => {
+    setOffsetY(window.pageYOffset + window.innerHeight);
+    setFooterMove(document.getElementById('footer').offsetTop - window.pageYOffset)
+  };
+  const getFooterOffTop = () => {
+    setFooterOffTop(document.getElementById('footer').offsetTop);
+    setFooterMove(document.getElementById('footer').offsetTop - window.pageYOffset)
+  };
+  useEffect(() => {
+    window.addEventListener('scroll', scrolling)
+    window.addEventListener('resize', getFooterOffTop)
+    setOffsetY(window.pageYOffset + window.innerHeight);
+    setFooterMove(document.getElementById('footer').offsetTop - window.pageYOffset)
+    setFooterOffTop(document.getElementById('footer').offsetTop)
+    return () => {
+      window.removeEventListener('scroll', scrolling)
+      window.removeEventListener('resize', getFooterOffTop)
+    }
+  }, [])
+  const magicPower = () => {
+    if(offsetY >= footerOffTop){
+      if(toggle===false){
+        return `
+          position:absolute;
+          top:0px
+        `
+      }else{
+        return `
+        position:absolute;
+        top:-${footerMove}px;
+        `
+      }
+    }else{
+      if(toggle===false){
+        return `
+          position:fixed;
+          bottom:-100vh; 
+          margin-bottom:0px;
+        `
+      }else{
+        return `
+        position:fixed;
+        bottom:-100vh; 
+        margin-bottom:100vh;
+        `
+        }
+      }
+    }
   return (
-    <WholeFooter toggle={toggle}>
-      <Footer>
-        <Background>25sprout</Background>
-        <Menu>
-          <CopyRight>COPYRIGHTⓒ 2020 25sprout,LLC. All RIGHTS RESERVED</CopyRight>
-          <div style={{ backgroundColor: "hsla(0,0%,95%,0.8)" }}>
-            <Title>Trending</Title>
-            <Article>
-              <div>
-                2018，Bootstrapped, Profitable, & Proud
+    <EmptyFooter id='footer'>
+      <WholeFooter toggle={toggle} magicPower={magicPower}>
+        <Footer>
+          <Background>25sprout</Background>
+          <Menu>
+            <CopyRight>COPYRIGHTⓒ 2020 25sprout,LLC. All RIGHTS RESERVED</CopyRight>
+            <div style={{ backgroundColor: "hsla(0,0%,95%,0.8)" }}>
+              <Title>Trending</Title>
+              <Article>
+                <div>
+                  2018，Bootstrapped, Profitable, & Proud
             </div>
-              <span>2019-01-03 by Alex</span>
-              <Divider />
-            </Article>
-            <Article>
-              <div>
-                幸運與那些在創業路上點滴的串連
+                <span>2019-01-03 by Alex</span>
+                <Divider />
+              </Article>
+              <Article>
+                <div>
+                  幸運與那些在創業路上點滴的串連
             </div>
-              <span>2018-04-11 by Alex</span>
-              <Divider />
-            </Article>
-            <Article>
-              <div>
-                寫給五年後走在創業路上的自己
+                <span>2018-04-11 by Alex</span>
+                <Divider />
+              </Article>
+              <Article>
+                <div>
+                  寫給五年後走在創業路上的自己
             </div>
-              <span>2017-04-11 by Alex</span>
-              <Divider />
-            </Article>
-            <ViewButton>View All <FaArrowRight style={{ fontSize: '10px' }} /></ViewButton>
-          </div>
-          <div style={{ backgroundColor: "hsla(0,0%,98%,0.8)" }}>
-            <Title>Explore our site</Title>
-            <List>
-              <li>About</li>
-              <li>Case Studies</li>
-              <li>Press Center</li>
-              <li>Career</li>
-              <li>Contact</li>
-              <li>Blog</li>
-              <li>25lab</li>
-            </List>
-            <Title>Handcrafted by 25sprout</Title>
-            <List>
-              <li>SurveyCake</li>
-            </List>
-            <GreenLine />
-          </div>
-          <div style={{ backgroundColor: "hsla(0,0%,95%,0.8)" }}>
-            <Title>Feel exciting to contact us</Title>
-            <Info>
-              <span><RiPhoneFill /></span>
-              <div>02-77515075</div>
-            </Info>
-            <Info>
-              <span><FaPaperPlane /></span>
-              <div>hey@25sprout.com</div>
-            </Info>
-            <Info>
-              <span><FaMapMarkerAlt /></span>
-              <div style={{ width: '80%' }}>105 台北市松山區南京東路五段1號12樓</div>
-            </Info>
-            <Title>Let's keep in touch</Title>
-          </div>
-        </Menu>
-      </Footer>
-    </WholeFooter>
+                <span>2017-04-11 by Alex</span>
+                <Divider />
+              </Article>
+              <ViewButton>View All <FaArrowRight style={{ fontSize: '10px' }} /></ViewButton>
+            </div>
+            <div style={{ backgroundColor: "hsla(0,0%,98%,0.8)" }}>
+              <Title>Explore our site</Title>
+              <List>
+                <li>About</li>
+                <li>Case Studies</li>
+                <li>Press Center</li>
+                <li>Career</li>
+                <li>Contact</li>
+                <li>Blog</li>
+                <li>25lab</li>
+              </List>
+              <Title>Handcrafted by 25sprout</Title>
+              <List>
+                <li>SurveyCake</li>
+              </List>
+              <GreenLine />
+            </div>
+            <div style={{ backgroundColor: "hsla(0,0%,95%,0.8)" }}>
+              <Title>Feel exciting to contact us</Title>
+              <Info>
+                <span><RiPhoneFill /></span>
+                <div>02-77515075</div>
+              </Info>
+              <Info>
+                <span><FaPaperPlane /></span>
+                <div>hey@25sprout.com</div>
+              </Info>
+              <Info>
+                <span><FaMapMarkerAlt /></span>
+                <div style={{ width: '80%' }}>105 台北市松山區南京東路五段1號12樓</div>
+              </Info>
+              <Title>Let's keep in touch</Title>
+            </div>
+          </Menu>
+        </Footer>
+      </WholeFooter>
+    </EmptyFooter>
   )
 }
 

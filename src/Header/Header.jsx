@@ -34,6 +34,9 @@ const Logo = styled.a`
     margin-left:65px;
     `
   }
+  @media (max-width:768px) {
+    margin-left:10px;
+  }
   `;
 const Menu = styled.div`
   background-image:url(https://www.25sprout.com/assets/navi-btn__90eef9d746fa85ccca72159b3b7740fd.png);
@@ -54,13 +57,15 @@ const Menu = styled.div`
     top:14px;
     right:65px;
     padding:0px;
-  `
+  `}
+  @media (max-width:768px) {
+    right:${props=>props.offsetY>=800 || props.toggle===true?'0px':'30px'};
   }
 `;
 const MenuIcon = styled.div`
   width: 28px;
   height: 3px;
-  background-color: ${(props)=>props.cross===true?'transparent':'#fff'};
+  background-color: ${(props)=>props.cross===true||props.windowBottomOffSetTop>=props.footerHeight?'transparent':'#fff'};
   transition: all .3s;
   &:before{
     content: "";
@@ -71,7 +76,7 @@ const MenuIcon = styled.div`
     position: absolute;
     left: 31px;
     transition: all 0.3s;
-    ${(props)=>props.cross===true?`
+    ${(props)=>props.cross===true||props.windowBottomOffSetTop>=props.footerHeight?`
       top: 26px;
       transform: rotate(-135deg);
     `:`
@@ -87,7 +92,7 @@ const MenuIcon = styled.div`
     position: absolute;
     left: 31px;
     transition: all .3s;
-    ${(props)=>props.cross===true?`
+    ${(props)=>props.cross===true||props.windowBottomOffSetTop>=props.footerHeight?`
       top: 26px;
       transform: rotate(135deg);
     `:`
@@ -95,25 +100,56 @@ const MenuIcon = styled.div`
     `}
   }
 `;
-
+const BackToTop = styled.div`
+  position:absolute;
+  z-index:1000;
+  cursor:pointer;
+  width:90px;
+  height:100%;
+  top:0px;
+  right:0px;
+`
 const Header = ({toggle,setToggle}) => {
   const [offsetY,setOffsetY] = useState(0);
-  const handleScroll = () => setOffsetY(window.pageYOffset);
+  const [windowBottomOffSetTop,setWindowBottomOffSetTop] = useState(0);
+  const [footerHeight,setFooterHeight] = useState(0);
+  const handleScroll = () => {
+    setOffsetY(window.pageYOffset);
+    setWindowBottomOffSetTop(window.pageYOffset + window.innerHeight)
+  };
   const [cross,setCross] = useState(false);
+  const getHehght = () => {
+    setFooterHeight(document.getElementById('footer').offsetHeight / 2 + document.getElementById('footer').offsetTop)
+  }
   useEffect(() => {
     window.addEventListener('scroll',handleScroll)
+    window.addEventListener('resize',getHehght)
+    setFooterHeight(document.getElementById('footer').offsetHeight / 2 + document.getElementById('footer').offsetTop)
+    setWindowBottomOffSetTop(window.pageYOffset + window.innerHeight)
     return () => {
       window.removeEventListener('scroll',handleScroll)
     }
   }, [])
   const crossPower = () => {
-    setCross((prev)=>!prev)
-    setToggle((prev)=>!prev)
+    setCross(prev=>!prev)
+    setToggle(prev=>!prev)
   }
+  
   return (
     <TopBar offsetY={offsetY} toggle={toggle}>
       <Logo href='/'offsetY={offsetY} toggle={toggle}/>
-      <Menu offsetY={offsetY} toggle={toggle} onClick={()=>{crossPower()}}>{offsetY>=800 || toggle===true?<MenuIcon cross={cross}/>:''}</Menu>
+      <Menu 
+      offsetY={offsetY} 
+      toggle={toggle} 
+      onClick={()=>{crossPower()}}
+      >
+        {offsetY>=800 || toggle===true?
+        <MenuIcon cross={cross} windowBottomOffSetTop={windowBottomOffSetTop} footerHeight={footerHeight}/>
+        :
+        ''
+        }
+      </Menu>
+      {windowBottomOffSetTop>=footerHeight?<BackToTop onClick={()=>{window.scrollTo({top: 0, left: 0, behavior: 'smooth' })}}/>:''}
     </TopBar>
   )
 }

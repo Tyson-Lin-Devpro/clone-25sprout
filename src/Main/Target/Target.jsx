@@ -1,8 +1,32 @@
 import styled from '@emotion/styled';
+import { useState, useEffect } from 'react'
+import { keyframes } from '@emotion/react'
+
+const turnAround = keyframes`
+0% {
+  transform: perspective(400px) rotateY(90deg);
+  animation-timing-function: ease-in;
+  opacity: 0;
+}
+40% {
+  transform: perspective(400px) rotateY(-20deg);
+  animation-timing-function: ease-in;
+}
+60% {
+  transform: perspective(400px) rotateY(10deg);
+  opacity: 1;
+}
+80% {
+  transform: perspective(400px) rotateY(-5deg);
+}
+100% {
+  transform: perspective(400px);
+}
+`
 
 const Image = styled.div`
   background-image: url(https://www.25sprout.com/assets/intro-bg__b4af211e93ca6c5b935d299bc5198dc1.jpg);
-  background-size:110%  ;
+  background-size:cover ;
   background-position: 50% 50%;
   position: relative;
   width:100%;
@@ -11,6 +35,10 @@ const Image = styled.div`
   overflow-x:hidden;
   & > div {
     position:absolute;
+    backface-visibility:hidden;
+    animation:1s ${props=>props.toggleCard===true?turnAround:``};
+    animation-fill-mode:forwards;
+    transform: perspective(400px) rotateY(90deg);
     top:130px;
     left:100px;
     background-color: #fff;
@@ -44,8 +72,30 @@ const Image = styled.div`
 `
 
 const Target = () => {
+  const [offsetY, setOffsetY] = useState(0);
+  const [toggleCard, setToggleCard] = useState(false);
+  const [targetHeight, setTargetHeight ] = useState([]);
+  const handleScroll = () => setOffsetY(window.pageYOffset + window.innerHeight);
+  const getTargetHeight = () => setTargetHeight([document.getElementById('target').offsetTop, document.getElementById('target').offsetHeight]);
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('resize', getTargetHeight)
+    setOffsetY(window.pageYOffset + window.innerHeight)
+    setTargetHeight([document.getElementById('target').offsetTop,document.getElementById('target').offsetHeight])
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', getTargetHeight)
+    }
+  }, [])
+  useEffect(() => {
+    if(offsetY>targetHeight[0]+targetHeight[1]/3){
+      setToggleCard(true)
+    }else{
+      setToggleCard(false)
+    }
+  }, [offsetY,targetHeight])
   return (
-    <Image>
+    <Image id='target' toggleCard={toggleCard}>
       <div>
         <h5>We provide innovative</h5>
         <h1>Digital Solutions</h1>
