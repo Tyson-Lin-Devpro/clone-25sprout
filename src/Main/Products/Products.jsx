@@ -87,6 +87,7 @@ const ImageDisplay = styled.div`
   width:80%;
   font-size: 0;
   position:relative;
+  transition:transform 0.2s;
   margin: 0 auto;
   & > img {
     width: 100%;
@@ -111,31 +112,39 @@ const ImageCotainer = styled.div`
 `
 const Products = () => {
   const [content, setContent] = useState('cake')
-  const [offsetY, setOffsetY] = useState(0);
+  const [offsetY, setOffsetY] = useState([]);
   const [productHeight, setProductHeight] = useState([]);
-  const handleScroll = () => setOffsetY(window.pageYOffset);
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll)
-    setOffsetY(window.pageYOffset)
+  const handleScroll = () => setOffsetY([window.pageYOffset,document.getElementById('product').getBoundingClientRect().top]);
+  const getProductHeight = () => {
     setProductHeight([document.getElementById('product').offsetTop, document.getElementById('product').offsetHeight])
+  };
+  useEffect(() => {
+    let productY = document.getElementById('product');
+    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('resize', getProductHeight)
+    setOffsetY([window.pageYOffset,productY.getBoundingClientRect().top])
+    setProductHeight([productY.offsetTop, productY.offsetHeight])
     return () => {
       window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', getProductHeight)
     }
   }, [])
   const rollingText = () => {
     if (
-      window.innerHeight + window.pageYOffset > productHeight[0] &&
-      window.pageYOffset < productHeight[0] + productHeight[1]
+      window.innerHeight + offsetY[0] > productHeight[0] &&
+      offsetY[0] < productHeight[0] + productHeight[1]
     ) {
-      return Math.round(offsetY / 100) * 20
+      return Math.round(offsetY[0] / 100) * 20
     }
   }
   const rollingImage = () => {
-    if (window.innerHeight + window.pageYOffset > productHeight[0]) {
-      return Math.round(offsetY / 100) * 10
-    }
+    if (
+      window.innerHeight + offsetY[0] > productHeight[0] + productHeight[1]/2 &&
+      offsetY[1]>=0
+      ){
+        return  (productHeight[1] + offsetY[1]) / offsetY[0] * 500 - 250
+      }
   }
-
   return (
     <ProductContent id='product'>
       <Image />
@@ -157,7 +166,7 @@ const Products = () => {
         </Select>
         {content === 'cake' ? <SurveyCake /> : <BackStage />}
         <ImageCotainer>
-          <ImageDisplay style={{transform:`translateY(350px)`}}>
+          <ImageDisplay style={{transform:`translateY(${rollingImage()}px)`}}>
             <OpacityImage src='https://www.25sprout.com/static/img/index/demo-surveycake.png' />
             <ChangeImage src='https://www.25sprout.com/static/img/index/demo-surveycake.png' style={{opacity:`${content === 'cake' ?1:0}`}} />
             <ChangeImage src='https://www.25sprout.com/static/img/index/demo-backstage.jpg' style={{opacity:`${content === '' ?1:0}`}}/>

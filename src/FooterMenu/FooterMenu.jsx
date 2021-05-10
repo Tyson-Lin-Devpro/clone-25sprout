@@ -16,7 +16,7 @@ const WholeFooter = styled.div`
   transition-duration:0.6s,0.6s;
   transition-timing-function:ease-in-out;
   z-index:500;
-  ${props=>props.magicPower()}
+  ${props => props.magicPower()}
 `
 const Footer = styled.div`
   width:100vw;
@@ -175,34 +175,34 @@ const FooterMenu = ({ toggle }) => {
     }
   }, [])
   const magicPower = () => {
-    if(offsetY >= footerOffTop){
-      if(toggle===false){
+    if (offsetY >= footerOffTop) {
+      if (toggle === false) {
         return `
           position:absolute;
           top:0px
         `
-      }else{
+      } else {
         return `
         position:absolute;
         top:-${footerMove}px;
         `
       }
-    }else{
-      if(toggle===false){
+    } else {
+      if (toggle === false) {
         return `
           position:fixed;
           bottom:-100vh; 
           margin-bottom:0px;
         `
-      }else{
+      } else {
         return `
         position:fixed;
         bottom:-100vh; 
         margin-bottom:100vh;
         `
-        }
       }
     }
+  }
   return (
     <EmptyFooter id='footer'>
       <WholeFooter toggle={toggle} magicPower={magicPower}>
@@ -215,21 +215,21 @@ const FooterMenu = ({ toggle }) => {
               <Article>
                 <div>
                   2018，Bootstrapped, Profitable, & Proud
-            </div>
+                </div>
                 <span>2019-01-03 by Alex</span>
                 <Divider />
               </Article>
               <Article>
                 <div>
                   幸運與那些在創業路上點滴的串連
-            </div>
+                </div>
                 <span>2018-04-11 by Alex</span>
                 <Divider />
               </Article>
               <Article>
                 <div>
                   寫給五年後走在創業路上的自己
-            </div>
+                </div>
                 <span>2017-04-11 by Alex</span>
                 <Divider />
               </Article>
