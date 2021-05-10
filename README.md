@@ -1,10 +1,10 @@
 # Clone-25sprout
 
-Clone-25spout專案使用React框架練習切版、動畫製作練習作品之一，自我挑戰在七天內的時間，能做出多相似的網站內容。  
+Clone-25spout專案使用React框架練習切版、動畫製作練習作品之一，自我挑戰在七天內的時間，能做出多相似的網站內容。
 練習應用React的各種技術，加深印象，提高掌握度。
 
 
-![首頁截圖頁面](https://github.com/gn00667340/react-ecommerce/blob/master/src/assets/preview.png)
+![首頁截圖頁面](https://github.com/gn00667340/clone-25sprout/blob/master/src/assets/preview.png)
 
 ## Demo - 專案展示
 
