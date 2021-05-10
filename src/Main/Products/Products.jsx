@@ -114,7 +114,10 @@ const Products = () => {
   const [content, setContent] = useState('cake')
   const [offsetY, setOffsetY] = useState([]);
   const [productHeight, setProductHeight] = useState([]);
-  const handleScroll = () => setOffsetY([window.pageYOffset,document.getElementById('product').getBoundingClientRect().top]);
+  const handleScroll = () => {
+    setOffsetY([window.pageYOffset,document.getElementById('product').getBoundingClientRect().top])
+    setProductHeight([document.getElementById('product').offsetTop, document.getElementById('product').offsetHeight])
+  };
   const getProductHeight = () => {
     setProductHeight([document.getElementById('product').offsetTop, document.getElementById('product').offsetHeight])
   };

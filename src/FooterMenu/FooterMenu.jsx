@@ -158,8 +158,10 @@ const FooterMenu = ({ toggle }) => {
   const scrolling = () => {
     setOffsetY(window.pageYOffset + window.innerHeight);
     setFooterMove(document.getElementById('footer').offsetTop - window.pageYOffset)
+    setFooterOffTop(document.getElementById('footer').offsetTop)
   };
   const getFooterOffTop = () => {
+    setOffsetY(window.pageYOffset + window.innerHeight);
     setFooterOffTop(document.getElementById('footer').offsetTop);
     setFooterMove(document.getElementById('footer').offsetTop - window.pageYOffset)
   };

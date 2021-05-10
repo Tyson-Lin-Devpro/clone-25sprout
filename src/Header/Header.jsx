@@ -116,6 +116,7 @@ const Header = ({toggle,setToggle}) => {
   const handleScroll = () => {
     setOffsetY(window.pageYOffset);
     setWindowBottomOffSetTop(window.pageYOffset + window.innerHeight)
+    setFooterHeight(document.getElementById('footer').offsetHeight / 2 + document.getElementById('footer').offsetTop)
   };
   const [cross,setCross] = useState(false);
   const getHehght = () => {
