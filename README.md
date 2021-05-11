@@ -23,7 +23,7 @@ Clone-25spout專案使用React框架練習切版、動畫製作練習作品之�
 ## Technical Skills - 使用哪些技術實作專案
 
 - Create-react-app - 快速建立React專案環境
-- React Hooks - 使用 useState 、 useEffect 控制動畫效果
+- React Hooks - 使用 useState 、 useEffect 實現事件監聽，達到控制動畫的效果
 - Emotion - 使用 Emotion 練習實作 Styled-component ，做 CSS 版面設計、切版應用、動畫製作( 使用Emotion時  
   VS Code無自動填入提示，藉此加深常用屬性名稱 )
 
