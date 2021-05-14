@@ -1,31 +1,37 @@
-# Clone-25sprout
+# Clone-25sprout 
 
-Clone-25spout專案使用React框架練習切版、動畫製作練習作品之一，自我挑戰在七天內的時間，能做出多相似的網站內容。
+Clone-25spout專案使用React框架練習切版、動畫製作。
 練習應用React的各種技術，加深印象，提高掌握度。
 
 
 ![首頁截圖頁面](https://github.com/gn00667340/clone-25sprout/blob/master/src/assets/preview.png)
 
-## Demo - 專案展示
+## 專案展示
 
 [Demo Website](https://gn00667340.github.io/clone-25sprout/)
 
-## Clone-Featrues - 仿造內容
+## 製作時間
 
-  1. 版面配置
-  2. Scrolling 動畫 ( 解決 Client 部分的 Class 重複賦值造成瀏覽器當機 )
-  3. 優化 Footer 兼 Menu 的製作( 非常特別的設計方式，並解決接近底部點擊選單時的跑版問題 )
-  4. 新增雜訊動畫效果
-  
-- 時限內未完成部分
-  - 各區塊 RWD 調整
+- 2021-05-04 ~ 2021-05-15
 
-## Technical Skills - 使用哪些技術實作專案
+## 仿造內容
+
+  1. UI介面
+  2. 動畫效果
+  3. RWD響應式設計
+
+## 修正項目
+
+  1. 解決 Client 區塊反覆滾動造成 Class 重複賦值導致瀏覽器當機
+  2. 解決 Footer (Menu) 接近網頁底部點擊選單時的跑版問題
+  3. 新增雜訊動畫效果
+
+## 使用哪些技術實作專案
 
 - Create-react-app - 快速建立React專案環境
-- React Hooks - 使用 useState 、 useEffect 控制動畫效果
-- Emotion - 使用 Emotion 練習實作 styled component ，做 CSS 版面設計、切版應用、動畫製作( 使用Emotion時  
-  VS Code無自動填入提示，藉此加深常用屬性名稱 )
+- React Hooks - 使用 useState 、 useEffect 設置監聽事件、綁定動畫效果
+- Emotion - 使用 Emotion 練習實作 Styled-components ，版面設計、切版應用、動畫製作
+- RWD - 自適應各種裝置螢幕尺寸
 
 ## Resource - 資料引用來源
 

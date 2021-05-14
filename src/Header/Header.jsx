@@ -59,7 +59,7 @@ const Menu = styled.div`
     padding:0px;
   `}
   @media (max-width:768px) {
-    right:${props=>props.offsetY>=800 || props.toggle===true?'0px':'30px'};
+    right:${props=>props.offsetY>=800 || props.toggle===true?'0px':'20px'};
   }
 `;
 const MenuIcon = styled.div`

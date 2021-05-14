@@ -35,6 +35,19 @@ const Slogan = styled.div`
   };
   & > p:nth-of-type(4),p:nth-of-type(5){
     font-size:18px;
+  };
+  @media (max-width:533px){
+    top:90px;
+    left:20px;
+    & > p:nth-of-type(1){
+      display:none;
+    };
+    & > p:nth-of-type(2),p:nth-of-type(3){
+      font-size:40px;
+    };
+    & > p:nth-of-type(4),p:nth-of-type(5){
+      font-size:15px;
+    };
   }
 `
 const cyberAnimation = keyframes`
@@ -106,12 +119,24 @@ const CyberPunk = styled.div`
   };
   & > p:nth-of-type(4),p:nth-of-type(5){
     font-size:18px;
+  };
+  @media (max-width:533px){
+    top:90px;
+    left:20px;
+    & > p:nth-of-type(1){
+      display:none;
+    };
+    & > p:nth-of-type(2),p:nth-of-type(3){
+      font-size:40px;
+    };
+    & > p:nth-of-type(4),p:nth-of-type(5){
+      font-size:15px;
+    };
   }
     text-shadow:-3px -3px 0px #F8F005, 3px 3px 0px #00E6E6;
     clip-path:inset(85% 0 15% 0);
-    transform:translate(10px,-5px);
-    animation:2s ${cyberAnimation} infinite;
-    animation-delay:5s;
+    animation:1.5s ${cyberAnimation} infinite;
+    animation-delay:7s;
     animation-timing-function:steps(2,end);
   
 `
@@ -133,7 +158,7 @@ const Image = styled.img`
 
 const Introduce = () => {
   return (
-    <FirstPart id='top'>
+    <FirstPart>
       <Div>
         <Image src="https://www.25sprout.com/static/img/index/banner.jpg" />
         <CyberPunk>

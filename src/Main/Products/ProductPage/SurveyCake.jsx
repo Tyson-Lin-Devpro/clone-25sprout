@@ -3,13 +3,14 @@ import styled from '@emotion/styled';
 const Content = styled.div`
   & > p{
     line-height:30px;
+    padding:5%;
   };  
   & > a {
       text-align:center;
       cursor:pointer;
       display:block;
       width:100px;
-      margin:50px auto 0px;
+      margin:30px auto 20px;
       text-decoration: none;
       width: 178px;
       height:50px;

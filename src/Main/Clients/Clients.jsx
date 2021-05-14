@@ -42,10 +42,11 @@ const Grid = styled.div`
 `
 const Image = styled.div`
   height:180px;
+  opacity:0;
   background-color:gray;
   animation:0.7s ${props => props.toggleClients===true?clientsUp:''};
   animation-delay:${props =>props.index*0.1}s;
-  animation-fill-mode:both;
+  animation-fill-mode:forwards;
 }
 `
 
@@ -84,7 +85,7 @@ const Clients = () => {
     }
   }, [])
   useEffect(() => {
-    if(offsetY>clientsHeight[0]+clientsHeight[1]/4){
+    if(offsetY>=clientsHeight[0]+clientsHeight[1]/5){
       setToggleClients(true)
     }else{
       setToggleClients(false)

@@ -67,6 +67,19 @@ const Image = styled.div`
           clear:both;
         }
       }
+    };
+    @media(max-width:616px){
+      top:130px;
+      left:30px;
+      width:68%;
+      height: auto;
+      padding: 30px 4%;
+    };
+    @media(max-width:480px){
+      width:90%;
+      top:20%;
+      left:5%;
+      right:5%;
     }
   }
 `

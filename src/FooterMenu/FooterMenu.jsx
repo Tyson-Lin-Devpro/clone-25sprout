@@ -7,13 +7,14 @@ const EmptyFooter = styled.div`
   width:100vw;
   height:100vh;
   position:relative;
+  @media (max-width:733px){
+    height:120vh;
+  }
 `
 const WholeFooter = styled.div`
   margin:0;
   padding:0;
   background-color:white;
-  transition-property:margin-bottom,top;
-  transition-duration:0.6s,0.6s;
   transition-timing-function:ease-in-out;
   z-index:500;
   ${props => props.magicPower()}
@@ -25,6 +26,9 @@ const Footer = styled.div`
   overflow:hidden;
   display:flex;
   justify-content:center;
+  @media (max-width:733px){
+    height:${props=>props.toggle===true?'100vh':'auto'}
+  }
 `
 const Background = styled.div`
   color:rgba(247,255,2,0.4);
@@ -47,13 +51,35 @@ const Menu = styled.div`
   z-index:100;
   & > div {
     width:33.3%;
-    padding:0px 5%;
+    height:580px;
+    padding:3% 5% 0px;
+  };
+  @media (max-width:733px){
+    display:block;
+    height:auto;
+    & > div {
+      width:100%;
+      padding:5% 5% 0px;
+      text-align:center;
+      &:nth-of-type(1),:nth-of-type(3){
+        display:${props=>props.toggle===true?'none':'block'};
+      };
+      &:nth-of-type(2){
+        ${props=>props.toggle===true?`
+          height:90vh;
+          margin:0px 0px 50px;
+          padding:25% 0px;
+        `:`
+        
+        `};
+      }
+    };
   }
 `
 const Title = styled.div`
   font-size: 12px;
   color: #00c775;
-  margin: 17% 0 16px;
+  margin: 16px 0px;
 `
 
 const List = styled.ul`
@@ -84,10 +110,17 @@ const Info = styled.div`
 `
 
 const GreenLine = styled.span`
-  display:block;
-  background-color: #00c775;
-  width: 70px;
-  height: 1px;
+  display:flex;
+  & > span {
+    display:block;
+    background-color: #00c775;
+    width: 70px;
+    height: 1px;
+  };
+  @media (max-width:733px){
+    justify-content:center;
+  }
+  
 `
 const CopyRight = styled.p`
   position:absolute;
@@ -108,11 +141,19 @@ const Article = styled.div`
     margin-bottom: 5px;
     font-size: 18px;
     color:#2d2d2d;
+    width:100%;
   };
   & > span {
     font-size: 14px;
     color: #474747;
+    width:100%;
   };
+  @media (max-width:733px){
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+  }
 `
 
 const Divider = styled.p`
@@ -180,27 +221,62 @@ const FooterMenu = ({ toggle }) => {
     if (offsetY >= footerOffTop) {
       if (toggle === false) {
         return `
-          position:absolute;
-          top:0px
+          @media (min-width:734px){
+            position:absolute;
+            top:0px;
+            transition:top 0.6s;
+          };
+          @media (max-width:733px){
+            position:absolute;
+            top:0px;
+            margin-top:0px;
+            transition:margin-top 0.6s;
+          }
         `
       } else {
         return `
-        position:absolute;
-        top:-${footerMove}px;
+          @media (min-width:734px){  
+            position:absolute;
+            top:-${footerMove}px;
+            transition:top 0.6s;
+          };
+          @media (max-width:733px){
+            position:absolute;
+            margin-top:-${footerMove}px;
+            transition:margin-top 0.6s;
+          }
         `
       }
     } else {
       if (toggle === false) {
         return `
-          position:fixed;
-          bottom:-100vh; 
-          margin-bottom:0px;
+          @media (min-width:734px){
+            position:fixed;
+            bottom:-100vh; 
+            margin-bottom:0px;
+            transition:margin-bottom 0.6s;
+          };
+          @media (max-width:733px){
+            position:fixed;
+            top:100vh;
+            margin-top:0px;
+            transition:margin-top 0.6s;
+          }
         `
       } else {
         return `
-        position:fixed;
-        bottom:-100vh; 
-        margin-bottom:100vh;
+          @media (min-width:734px){
+            position:fixed;
+            bottom:-100vh; 
+            margin-bottom:100vh;
+            transition:margin-bottom 0.6s;
+          };
+          @media (max-width:733px){
+            position:fixed;
+            top:100vh;
+            margin-top:-100vh;
+            transition:margin-top 0.6s;
+          }
         `
       }
     }
@@ -208,11 +284,11 @@ const FooterMenu = ({ toggle }) => {
   return (
     <EmptyFooter id='footer'>
       <WholeFooter toggle={toggle} magicPower={magicPower}>
-        <Footer>
+        <Footer toggle={toggle}>
           <Background>25sprout</Background>
-          <Menu>
+          <Menu toggle={toggle}>
             <CopyRight>COPYRIGHTⓒ 2020 25sprout,LLC. All RIGHTS RESERVED</CopyRight>
-            <div style={{ backgroundColor: "hsla(0,0%,95%,0.8)" }}>
+            <div style={{ backgroundColor: "hsla(0,0%,95%,0.8)"}}>
               <Title>Trending</Title>
               <Article>
                 <div>
@@ -252,7 +328,7 @@ const FooterMenu = ({ toggle }) => {
               <List>
                 <li>SurveyCake</li>
               </List>
-              <GreenLine />
+              <GreenLine><span/></GreenLine>
             </div>
             <div style={{ backgroundColor: "hsla(0,0%,95%,0.8)" }}>
               <Title>Feel exciting to contact us</Title>
@@ -266,7 +342,7 @@ const FooterMenu = ({ toggle }) => {
               </Info>
               <Info>
                 <span><FaMapMarkerAlt /></span>
-                <div style={{ width: '80%' }}>105 台北市松山區南京東路五段1號12樓</div>
+                <div>105 台北市松山區南京東路五段1號12樓</div>
               </Info>
               <Title>Let's keep in touch</Title>
             </div>

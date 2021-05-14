@@ -15,6 +15,7 @@ const Image = styled.div`
   height:100%;
   min-height:auto;
   background-position: 50% 50%;
+  background-size: cover;
   overflow-x: hidden;
   filter:brightness(30%);
   position:absolute;
@@ -38,6 +39,9 @@ const Select = styled.div`
   justify-content:center;
   align-items:center;
   width:100%;
+  @media (max-width:425px){
+    font-size:10px;
+  }
   & > span {
     display:inline-block;
     background-color: hsla(0,0%,100%,.3);
@@ -63,6 +67,11 @@ const LeftImage = styled.div`
   background-image: url(https://www.25sprout.com/assets/logo-products__c41c1e32673b84b9379128c5e1a107ff.png);
   background-repeat:no-repeat;
   background-position:50% 0 ;
+  @media (max-width:425px){
+    width:150px;
+    background-size:90%;
+    background-position:0 -90%;
+  }
 `
 const RightImage = styled.div`
   width: 230px;
@@ -70,6 +79,10 @@ const RightImage = styled.div`
   background-image: url(https://www.25sprout.com/assets/logo-products__c41c1e32673b84b9379128c5e1a107ff.png);
   background-repeat:no-repeat;
   background-position:50% 100% ;
+  @media (max-width:425px){
+    width:150px;
+    background-size:100%;
+  }
 `
 
 const Logo = styled.div`
@@ -81,21 +94,22 @@ const Logo = styled.div`
   transition:all 0.2s;
 `
 const ImageDisplay = styled.div`
-  border: 35px solid transparent;
   border-bottom: none;
   max-width: 972px;
   width:80%;
   font-size: 0;
   position:relative;
+  bottom:0px;
   transition:transform 0.2s;
+  transform:translateY(300px);
   margin: 0 auto;
+  @media (max-width:768px){
+    width:90%;
+  }
   & > img {
     width: 100%;
     opacity: 0;
   }
-`
-const OpacityImage = styled.img`
-  opacity: 0;
 `
 const ChangeImage = styled.img`
   border: 35px solid #000;
@@ -103,11 +117,13 @@ const ChangeImage = styled.img`
   position: absolute;
   left: 0;
   transition: all 0.7s ease-in-out;
+  @media (max-width:768px){
+    border: 5px solid #000;
+  }
 `
 const ImageCotainer = styled.div`
-  width: 70%;
-  margin-left: 15%;
-  position: relative;
+  display:flex;
+  justify-content:center;
   overflow: hidden;
 `
 const Products = () => {
@@ -137,21 +153,24 @@ const Products = () => {
       window.innerHeight + offsetY[0] > productHeight[0] &&
       offsetY[0] < productHeight[0] + productHeight[1]
     ) {
-      return Math.round(offsetY[0] / 100) * 20
+      return (productHeight[1] + offsetY[1]) / offsetY[0] * 500 - 600
     }
   }
   const rollingImage = () => {
+    if((productHeight[1] + offsetY[1]) / offsetY[0] * 600 - 100<=0){
+      return
+    }
     if (
-      window.innerHeight + offsetY[0] > productHeight[0] + productHeight[1]/2 &&
-      offsetY[1]>=0
+      offsetY[0] <= productHeight[0] + productHeight[1]/2 &&
+      offsetY[1]<=0
       ){
-        return  (productHeight[1] + offsetY[1]) / offsetY[0] * 500 - 250
+        return  (productHeight[1] + offsetY[1]) / offsetY[0] * 600 - 100
       }
   }
   return (
     <ProductContent id='product'>
       <Image />
-      <Logo style={{ left: `-${rollingText()}px` }}>25sprout</Logo>
+      <Logo style={{ left: `${rollingText()}px` }}>25sprout</Logo>
       <Title>
         <h5>Our</h5>
         <h1>Products</h1>
@@ -170,9 +189,9 @@ const Products = () => {
         {content === 'cake' ? <SurveyCake /> : <BackStage />}
         <ImageCotainer>
           <ImageDisplay style={{transform:`translateY(${rollingImage()}px)`}}>
-            <OpacityImage src='https://www.25sprout.com/static/img/index/demo-surveycake.png' />
-            <ChangeImage src='https://www.25sprout.com/static/img/index/demo-surveycake.png' style={{opacity:`${content === 'cake' ?1:0}`}} />
-            <ChangeImage src='https://www.25sprout.com/static/img/index/demo-backstage.jpg' style={{opacity:`${content === '' ?1:0}`}}/>
+            <img src='https://www.25sprout.com/static/img/index/demo-surveycake.png'alt='imgNone'/>
+            <ChangeImage src='https://www.25sprout.com/static/img/index/demo-surveycake.png' style={{opacity:`${content === 'cake' ?1:0}`}} alt='img1'/>
+            <ChangeImage src='https://www.25sprout.com/static/img/index/demo-backstage.jpg' style={{opacity:`${content === '' ?1:0}`}} alt='img2'/>
           </ImageDisplay>
         </ImageCotainer>
       </Title>
