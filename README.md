@@ -12,17 +12,7 @@ Clone-25spout專案使用React框架練習切版、動畫製作。
 
 ## 製作時間
 
-<<<<<<< HEAD
 - 2021-05-04 ~ 2021-05-15
-=======
-  1. 版面配置
-  2. Scrolling 動畫 ( 解決 Clients 部分的 Class 重複賦值造成瀏覽器當機 )
-  3. 優化 Footer 兼 Menu 的製作( 非常特別的設計方式，並解決接近底部點擊選單時的跑版問題 )
-  4. 新增雜訊動畫效果
-  
-- 時限內未完成部分
-  - 各區塊 RWD 調整
->>>>>>> d4b57ca0715e9e639b1111d9d97cd212159340ec
 
 ## 仿造內容
 
@@ -39,15 +29,8 @@ Clone-25spout專案使用React框架練習切版、動畫製作。
 ## 使用哪些技術實作專案
 
 - Create-react-app - 快速建立React專案環境
-<<<<<<< HEAD
-- React Hooks - 使用 useState 、 useEffect 設置監聽事件、綁定動畫效果
-- Emotion - 使用 Emotion 練習實作 Styled-components ，版面設計、切版應用、動畫製作
-- RWD - 自適應各種裝置螢幕尺寸
-=======
-- React Hooks - 使用 useState 、 useEffect 實現事件監聽，達到控制動畫的效果
-- Emotion - 使用 Emotion 練習實作 Styled-component ，做 CSS 版面設計、切版應用、動畫製作( 使用Emotion時  
-  VS Code無自動填入提示，藉此加深常用屬性名稱 )
->>>>>>> d4b57ca0715e9e639b1111d9d97cd212159340ec
+- React Hooks - 使用 useState 、 useEffect 實現事件監聽，實現監控動畫的效果
+- Emotion - 使用 Emotion 練習實作 Styled-components、版面配置、動畫製作
 
 ## Resource - 資料引用來源
 
